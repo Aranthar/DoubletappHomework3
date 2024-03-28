@@ -1,7 +1,5 @@
 package com.example.doubletapphomework3.screens.task_editor
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -37,14 +35,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -314,32 +308,6 @@ class EditHabitScreen(
 
                 }
         )
-    }
-
-    @Composable
-    fun getPixelColorFromBrush(brush: Brush, point: Offset): Color? {
-        // Получите контекст
-        val context = LocalContext.current
-
-        // Создайте временный Canvas для отрисовки
-        val tempBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(tempBitmap.asImageBitmap())
-        
-        // Нарисуйте фон с помощью переданной кисти
-        canvas.drawIntoCanvas {
-            it.drawContext = android.graphics.Canvas().apply {
-                drawRect(0f, 0f, 1f, 1f, brush.toComposeBrush().asAndroidBrush())
-            }
-        }
-
-        // Получите цвет пикселя в указанной точке
-        val color = tempBitmap.getPixel(point.x.toInt(), point.y.toInt())
-
-        // Освободите ресурсы
-        tempBitmap.recycle()
-
-        // Создайте Color объект из полученного цвета
-        return Color(color)
     }
 }
 

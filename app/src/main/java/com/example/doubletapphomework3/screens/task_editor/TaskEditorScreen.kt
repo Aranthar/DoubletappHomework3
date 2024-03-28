@@ -287,13 +287,6 @@ class EditHabitScreen(
                 if (index != count - 1) Spacer(modifier = Modifier.width(10.dp))
             }
         }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(20.dp)
-                .background(selectedColor.value)
-        )
     }
 
     @Composable
